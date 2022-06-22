@@ -16,19 +16,19 @@
 
   <body class="p-4">
     <div id="app">
-      {{ data }}{{publishedBooksMessage}}
       <table class="table">
         <thead>
           <tr>
-            <th v-for="item in head" scope="col">{{item}}</th>
+            <th v-for="item in header" scope="col">{{item}}</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(item, index) in data">
-            <th v-for="d in head" scope="col">{{item[d]}}</th>
+            <th v-for="v in header" scope="col">{{item[v] || '-'}}</th>
           </tr>
         </tbody>
       </table>
+      <pre> {{ data }}</pre>
     </div>
     <script type="module">
       import { createApp } from 'vue';
@@ -41,6 +41,8 @@
                 id: 1,
                 name: 'bird',
                 tel: 123,
+                tel1: 123,
+                tel2: 123,
               },
               {
                 id: 2,
@@ -51,29 +53,20 @@
                 id: 3,
                 name: 'tan',
                 tel: 123,
+                tel1: 123,
+                tel2: 123,
               },
             ],
           };
         },
         computed: {
-          // a computed getter
-          publishedBooksMessage() {
-            // `this` points to the component instance
-            return 1;
-          },
-          head() {
-            // return [{ v1: 'id', v2: 'name' }];
+          header() {
             return Object.getOwnPropertyNames(this.data[0]);
           },
         },
         methods: {
-          greet(event) {
-            // `this` inside methods points to the current active instance
-            alert(`Hello ${this.name}!`);
-            // `event` is the native DOM event
-            if (event) {
-              alert(event.target.tagName);
-            }
+          greet() {
+            console.log('hello');
           },
         },
       }).mount('#app');
