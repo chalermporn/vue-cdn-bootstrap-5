@@ -25,8 +25,7 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in data">
-            <th scope="row">{{index+1}}</th>
-            <td>{{item.name}}</td>
+            <th v-for="d in head" scope="col">{{item[d]}}</th>
           </tr>
         </tbody>
       </table>
@@ -41,10 +40,17 @@
               {
                 id: 1,
                 name: 'bird',
+                tel: 123,
               },
               {
                 id: 2,
                 name: 'sutin',
+                tel: 123,
+              },
+              {
+                id: 3,
+                name: 'tan',
+                tel: 123,
               },
             ],
           };
