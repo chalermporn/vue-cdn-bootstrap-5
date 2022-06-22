@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="main.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
+  </head>
+
+  <body class="p-4">
+    <div id="app">
+      {{ data }}{{publishedBooksMessage}}
+      <table class="table">
+        <thead>
+          <tr>
+            <th v-for="item in head" scope="col">{{item}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in data">
+            <th scope="row">{{index+1}}</th>
+            <td>{{item.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script type="module">
+      import { createApp } from 'vue';
+
+      createApp({
+        data() {
+          return {
+            data: [
+              {
+                id: 1,
+                name: 'bird',
+              },
+              {
+                id: 2,
+                name: 'sutin',
+              },
+            ],
+          };
+        },
+        computed: {
+          // a computed getter
+          publishedBooksMessage() {
+            // `this` points to the component instance
+            return 1;
+          },
+          head() {
+            // return [{ v1: 'id', v2: 'name' }];
+            return Object.getOwnPropertyNames(this.data[0]);
+          },
+        },
+        methods: {
+          greet(event) {
+            // `this` inside methods points to the current active instance
+            alert(`Hello ${this.name}!`);
+            // `event` is the native DOM event
+            if (event) {
+              alert(event.target.tagName);
+            }
+          },
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
